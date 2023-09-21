@@ -13,12 +13,13 @@ class kirimemail extends Mailable
 {
     use Queueable, SerializesModels;
 
-    /**
-     * Create a new message instance.
-     */
-    public function __construct()
+    public $orderId;
+    public $name;
+
+    public function __construct($orderId, $name)
     {
-        //
+        $this->orderId = $orderId;
+        $this->name = $name;
     }
 
     /**
@@ -27,7 +28,7 @@ class kirimemail extends Mailable
     public function envelope(): Envelope
     {
         return new Envelope(
-            subject: 'Kirimemail',
+            subject: 'Order Product',
         );
     }
 
@@ -42,7 +43,7 @@ class kirimemail extends Mailable
     // }
     public function build() 
     {
-        return $this->view('teskirim');
+        return $this->view('order_email');
     }
     /**
      * Get the attachments for the message.

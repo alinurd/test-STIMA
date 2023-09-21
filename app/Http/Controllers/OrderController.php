@@ -2,10 +2,12 @@
 
 namespace App\Http\Controllers;
 
+use App\Mail\kirimemail;
 use App\Models\order;
 use App\Models\product;
 use Illuminate\Http\Request;
 use Illuminate\Support\Carbon;
+use Illuminate\Support\Facades\Mail;
 
 class OrderController extends Controller
 {
@@ -94,6 +96,8 @@ class OrderController extends Controller
 
             if ($ordercek) {
                 $product->save(); // Save the updated stock
+                Mail::to(auth()->user()->email)->send(new kirimemail($ordercek->code_id, $product->name ));
+
             }
 
             // dd('stok success');
@@ -102,6 +106,8 @@ class OrderController extends Controller
         } else {
 
             // dd('stok tidak cukup');
+            Mail::to(auth()->user()->email)->send(new kirimemail(null, $product->name));
+
             session()->flash('error', 'Stok product tidak cukup');
             return redirect()->route('home')->with('error', 'Stok product tidak cukup');
         }
