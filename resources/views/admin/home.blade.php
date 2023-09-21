@@ -7,7 +7,7 @@
         <h1>Dashboard</h1>
         <nav>
             <ol class="breadcrumb">
-                <li class="breadcrumb-item"><a href="index.html">Home</a></li>
+                <li class="breadcrumb-item"><a href="{{ url('admin') }}">Panel</a></li>
                 <li class="breadcrumb-item active">Dashboard</li>
             </ol>
         </nav>
@@ -23,64 +23,34 @@
                     <!-- Sales Card -->
                     <div class="col-xxl-4 col-md-6">
                         <div class="card info-card sales-card">
-
-                            <div class="filter">
-                                <a class="icon" href="#" data-bs-toggle="dropdown"><i class="bi bi-three-dots"></i></a>
-                                <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow">
-                                    <li class="dropdown-header text-start">
-                                        <h6>Filter</h6>
-                                    </li>
-
-                                    <li><a class="dropdown-item" href="#">Today</a></li>
-                                    <li><a class="dropdown-item" href="#">This Month</a></li>
-                                    <li><a class="dropdown-item" href="#">This Year</a></li>
-                                </ul>
-                            </div>
-
                             <div class="card-body">
-                                <h5 class="card-title">Sales <span>| Today</span></h5>
+                                <h5 class="card-title">Product <h5>
 
-                                <div class="d-flex align-items-center">
-                                    <div class="card-icon rounded-circle d-flex align-items-center justify-content-center">
-                                        <i class="bi bi-cart"></i>
-                                    </div>
-                                    <div class="ps-3">
-                                        <h6>145</h6>
-                                        <span class="text-success small pt-1 fw-bold">12%</span> <span class="text-muted small pt-2 ps-1">increase</span>
+                                        <div class="d-flex align-items-center">
+                                            <div class="card-icon rounded-circle d-flex align-items-center justify-content-center">
+                                                <i class="bi bi-cart"></i>
+                                            </div>
+                                            <div class="ps-3">
+                                                <h6>{{ $productCount }}</h6>
+                                                <span class="text-success small pt-1 fw-bold">12%</span> <span class="text-muted small pt-2 ps-1">increase</span>
 
-                                    </div>
-                                </div>
+                                            </div>
+                                        </div>
                             </div>
-
                         </div>
                     </div><!-- End Sales Card -->
-
                     <!-- Revenue Card -->
                     <div class="col-xxl-4 col-md-6">
                         <div class="card info-card revenue-card">
-
-                            <div class="filter">
-                                <a class="icon" href="#" data-bs-toggle="dropdown"><i class="bi bi-three-dots"></i></a>
-                                <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow">
-                                    <li class="dropdown-header text-start">
-                                        <h6>Filter</h6>
-                                    </li>
-
-                                    <li><a class="dropdown-item" href="#">Today</a></li>
-                                    <li><a class="dropdown-item" href="#">This Month</a></li>
-                                    <li><a class="dropdown-item" href="#">This Year</a></li>
-                                </ul>
-                            </div>
-
                             <div class="card-body">
-                                <h5 class="card-title">Revenue <span>| This Month</span></h5>
+                                <h5 class="card-title">Pendapata <span></span></h5>
 
                                 <div class="d-flex align-items-center">
                                     <div class="card-icon rounded-circle d-flex align-items-center justify-content-center">
                                         <i class="bi bi-currency-dollar"></i>
                                     </div>
                                     <div class="ps-3">
-                                        <h6>$3,264</h6>
+                                        <h6>{{ number_format($pendapatan, 0, ',', '.') }}</h6>
                                         <span class="text-success small pt-1 fw-bold">8%</span> <span class="text-muted small pt-2 ps-1">increase</span>
 
                                     </div>
@@ -89,7 +59,38 @@
 
                         </div>
                     </div><!-- End Revenue Card -->
+                    <div class="row">
+                        @foreach ($products as $product)
 
+                        <div class="card mb-3">
+                            <div class="row g-0">
+                                <div class="col-md-4">
+                                    <img src="{{ asset('storage/images/' . $product->img) }}" width="300px" class="img-fluid rounded-start" alt="...">
+                                </div>
+                                <div class="col-md-8">
+                                    <div class="card-body">
+                                        <h5 class="card-title">{{ $product->name }}</h5>
+                                        <span class="card-title">Rp. {{ $product->price }}</span>
+                                        <i class=" ">Stok: {{ $product->stok }}</i>
+                                        <p class="card-text"> {{ $product->desc }}</p>
+
+                                        <h5 class="card-title">
+                                            @if($role =="users")
+                                            <a class="nav-link collapsed" href="{{ route('order.create', ['id' => $product->id]) }}">
+                                                <button type=" button" class="btn btn-primary"> <i class="bi bi-bag-plus"></i></i> Order</button>
+                                            </a>
+                                            @else
+                                            <a class=" btn btn-warning  text-dark" href="{{ route('products.edit', ['id' => $product->id]) }}">
+                                                <i class="bi bi-pencil-square"></i>
+                                            </a>
+                                            @endif
+                                        </h5>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        @endforeach
+                    </div>
                     <!-- Customers Card -->
                     <div class="col-xxl-4 col-xl-12">
 
