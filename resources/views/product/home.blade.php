@@ -63,11 +63,11 @@
 
                                     <td>{{ $product->created_at }}</td>
                                     <td>
-                                        <a class="nav-link collapsed text-danger" href="{{url('admin/product/destroy')}}">
+                                        <a class="nav-link collapsed text-danger" onclick="return confirm('yakin Hapus Product ini?') ?  submit() : false"  href="{{ route('products.delete', ['id' => $product->id]) }}">
                                             <i class="bi bi-trash"></i></i>
 
-                                        </a> |
-                                        
+                                        </a> 
+
                                         <a class="nav-link collapsed text-warning" href="{{ route('products.edit', ['id' => $product->id]) }}">
                                             <i class="bi bi-pencil-square"></i>
                                         </a>

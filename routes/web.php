@@ -23,6 +23,8 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth', 'isAdmin']], functio
     Route::post('/product', [ProductController::class, 'store'])->name('products.store');
     Route::get('/product/edit/{id}', [ProductController::class, 'edit'])->name('products.edit');
     Route::post('/product/update/{id}', [ProductController::class, 'update'])->name('products.update');
+    Route::get('/product/destroy/{id}', [ProductController::class, 'destroy'])->name('products.delete');
+    // Route::get('/destroy/{id}', [OutletController::class, 'destroy'])->name('hapus');
 
 // Route::get('/product/{product}/edit', [ProductController::class, 'edit'])->name('products.edit');
     
