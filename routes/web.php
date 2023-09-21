@@ -2,9 +2,11 @@
 
 use App\Http\Controllers\AdminContoller;
 use App\Http\Controllers\ExportController;
+use App\Http\Controllers\KirimemailController;
 use App\Http\Controllers\OrderController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\UserController;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -42,6 +44,7 @@ Route::group(['prefix' => 'users', 'middleware' => ['auth', 'isUser']], function
 
 Route::get('/export_excel', [ExportController::class, 'export'])->name('export.data');
 Route::get('/export_pdf', [ExportController::class, 'export_pdf'])->name('export.export_pdf');
+Route::get('/kirimemail', [KirimemailController::class, 'index'])->name('kirimemail.index');
 
 
 // Route::middleware(['auth', 'verified'])->group(function () {

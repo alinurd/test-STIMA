@@ -46,7 +46,7 @@
         </div><!-- End Logo -->
 
         <div class="search-bar">
-            <form class="search-form d-flex align-items-center"  >
+            <form class="search-form d-flex align-items-center">
                 <input type="text" name="query" placeholder="Search" title="Enter search keyword">
                 <button type="reset" title="Search"><i class="bi bi-search"></i></button>
             </form>
@@ -67,7 +67,7 @@
                         <i class="bi bi-bell"></i>
                         <span class="badge bg-primary badge-number">4</span>
                     </a><!-- End Notification Icon -->
- 
+
                 </li><!-- End Notification Nav -->
 
                 <li class="nav-item dropdown">
@@ -75,7 +75,7 @@
                     <a class="nav-link nav-icon" href="#" data-bs-toggle="dropdown">
                         <i class="bi bi-chat-left-text"></i>
                         <span class="badge bg-success badge-number">3</span>
-                    </a> 
+                    </a>
 
                 </li><!-- End Messages Nav -->
 
@@ -86,7 +86,7 @@
                         <span class="d-none d-md-block   ps-2">{{ auth()->user()->name }}</span>
                     </a><!-- End Profile Iamge Icon -->
 
-                     
+
                 </li><!-- End Profile Nav -->
 
             </ul>
@@ -109,6 +109,12 @@
                 <a class="nav-link " href="{{url($role)}}">
                     <i class="bi bi-grid"></i>
                     <span>Dashboard</span>
+                </a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link " href="{{route('kirimemail.index')}}">
+                    <i class="bi bi-grid"></i>
+                    <span>kirimemail.index</span>
                 </a>
             </li>
             <li class="nav-item">
@@ -166,7 +172,7 @@
     <!-- ======= Footer ======= -->
     <footer id="footer" class="footer">
         <div class="copyright">
-            &copy; Copyright <strong><span>Ali Nurdin </span></strong>. All Rights Reserved 
+            &copy; Copyright <strong><span>Ali Nurdin </span></strong>. All Rights Reserved
         </div>
         <div class="credits">
             <!-- All the links in the footer should remain intact. -->
