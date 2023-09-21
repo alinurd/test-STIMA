@@ -8,7 +8,7 @@
         <h1>Data Product</h1>
         <nav>
             <ol class="breadcrumb">
-                <li class="breadcrumb-item"><a href="index.html">Home</a></li>
+                <li class="breadcrumb-item"><a href="{{ url($role) }}"> {{$role }} Panel</a></li>
                 <li class="breadcrumb-item">Admin</li>
                 <li class="breadcrumb-item active">Product</li>
             </ol>
@@ -50,7 +50,7 @@
                             </thead>
                             <tbody>
                                 <?php
-                                $no=1;?>
+                                $no = 1; ?>
                                 @foreach ($products as $product)
                                 <tr>
                                     <th scope="row"> {{ $no++ }}</th>
