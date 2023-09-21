@@ -24,12 +24,14 @@
                     <div class="card-body">
                         <h5 class="card-title">
                             <a class="nav-link collapsed" href="{{url('admin/product/create')}}">
-                                <button type="button" class="btn btn-dark"> <i class="bi bi-plus-circle-fill"></i></i></button>
+                                <button type="button" class="btn btn-primary"> <i class="bi bi-plus-circle"></i></i> Tambah Data</button>
                             </a>
                         </h5>
                         @if (session('success'))
-                        <div class="alert alert-success">
+
+                        <div class="alert alert-success alert-dismissible fade show" role="alert">
                             {{ session('success') }}
+                            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
                         </div>
                         @endif
                         <!-- Table with stripped rows -->
@@ -63,10 +65,10 @@
 
                                     <td>{{ $product->created_at }}</td>
                                     <td>
-                                        <a class="nav-link collapsed text-danger" onclick="return confirm('yakin Hapus Product ini?') ?  submit() : false"  href="{{ route('products.delete', ['id' => $product->id]) }}">
+                                        <a class="nav-link collapsed text-danger" onclick="return confirm('yakin Hapus Product ini?') ?  submit() : false" href="{{ route('products.delete', ['id' => $product->id]) }}">
                                             <i class="bi bi-trash"></i></i>
 
-                                        </a> 
+                                        </a>
 
                                         <a class="nav-link collapsed text-warning" href="{{ route('products.edit', ['id' => $product->id]) }}">
                                             <i class="bi bi-pencil-square"></i>
