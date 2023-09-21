@@ -46,6 +46,9 @@ $hide = 'hide' ?>
                                 <a id="export" href="{{ route('export.data') }}" class="btn btn-primary">
                                     <i class="bi bi-file-earmark-excel"></i> Export to Excel
                                 </a>
+                                <a id="export" href="{{ route('export.export_pdf') }}" class="btn btn-info">
+                                    <i class="bi bi-file-earmark-pdf"></i> Export to pdf
+                                </a>
                             </div>
                         </div>
                     </div>
@@ -81,7 +84,7 @@ $hide = 'hide' ?>
                             @foreach ($orders as $order)
                             <tr>
                                 <td>{{ $no++ }}</td>
-                                <th scope="row">#{{ $order->code_id }} - {{ $order->id }}</th> 
+                                <th scope="row">#{{ $order->code_id }} - {{ $order->id }}</th>
                                 <td>{{ $order->userName }}</td>
                                 <td>{{ $order->productName }}</td>
                                 <td>{{ number_format($order->price, 0, ',', '.') }}</td>
