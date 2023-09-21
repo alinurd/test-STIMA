@@ -23,7 +23,7 @@ class ProductController extends Controller
 
         // Kirim data produk ke tampilan "product.home"
         return view('product.home', compact('products'));
-        
+
     }
 
     public function create()
@@ -43,8 +43,22 @@ class ProductController extends Controller
         $validatedData['created_at'] = Carbon::now();
         $validatedData['created'] = auth()->user()->name;
         $validatedData['update'] ='';
-        // Simpan data produk ke dalam tabel "products" menggunakan model
-        Product::create($validatedData);
+
+
+        if ($request->hasFile('image')) {
+            // Mendapatkan file gambar dari input
+            $image = $request->file('image');
+
+            // Menyimpan gambar dengan nama unik ke direktori tertentu (misalnya, storage/app/public/images)
+            $imageName = time() . '.' . $image->getClientOriginalExtension();
+            $image->storeAs('public/images', $imageName);
+
+            // Menyimpan nama gambar ke dalam database
+            $validatedData['img'] = $imageName;
+        }
+
+
+          Product::create($validatedData);
         
         session()->flash('success', 'Product created successfully');
         return redirect()->route('products.index')->with('success', 'Product created successfully');

@@ -18,6 +18,7 @@ return new class extends Migration
             $table->integer('price');
             $table->integer('stok');
             $table->text('desc');
+            $table->string('img');
             $table->integer('category')->default(0);
             $table->string('created');
             $table->string('update');

@@ -53,6 +53,12 @@
                                     <td>{{ $product->code }}</td>
                                     <td>{{ $product->stok }}</td>
                                     <td>{{ $product->price }}</td>
+
+                                    <td> 
+                                            <img id="openLightbox" src="{{ asset('storage/images/' . $product->img) }}" width="100px" alt="gambar {{ $product->name }} tidak bisa ditampilkan">
+                                         
+                                    </td>
+
                                     <td>{{ $product->created_at }}</td>
                                     <td>
                                         <a class="nav-link collapsed text-danger" href="{{url('admin/product/destroy')}}">

@@ -25,7 +25,7 @@
 
                         <!-- Custom Styled Validation -->
 
-                        <form class="row g-3 needs-validation" method="POST" action="{{ route('products.store') }}" novalidate>
+                        <form class="row g-3 needs-validation" method="POST" action="{{ route('products.store') }}" enctype="multipart/form-data"  novalidate>
                             @csrf
                             <div class=" col-md-12">
                                 <label for="validationCustom01" class="form-label">Name Product</label>
@@ -55,7 +55,7 @@
                             <div class="col-md-12">
                                 <label for="inputNumber" class="col-sm-2 col-form-label">File Upload</label>
                                 <div class="col-sm-10">
-                                    <input class="form-control" name="file" type="file" id="formFile" required>
+                                    <input class="form-control" name="image" type="file" id="formFile" required>
                                     <div class="invalid-feedback">
 
                                     </div>
@@ -64,7 +64,7 @@
                             </div>
                             <div class="col-md-12">
                                 <label for="validationCustom05" class="form-label">description</label>
-                                <textarea class="form-control" name="desc"  style="height: 100px"></textarea>
+                                <textarea class="form-control" name="desc" style="height: 100px"></textarea>
                                 <div class="valid-feedback">
                                     Looks good!
                                 </div>
