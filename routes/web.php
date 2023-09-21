@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\AdminContoller;
+use App\Http\Controllers\ExportController;
 use App\Http\Controllers\OrderController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\UserController;
@@ -36,6 +37,10 @@ Route::group(['prefix' => 'users', 'middleware' => ['auth', 'isUser']], function
     Route::post('/order', [OrderController::class, 'store'])->name('order.store');
 
 });
+
+// routes/web.php
+
+Route::get('/export-data', [ExportController::class, 'export'])->name('export.data');
 
 
 // Route::middleware(['auth', 'verified'])->group(function () {

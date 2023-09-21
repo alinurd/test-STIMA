@@ -29,69 +29,77 @@ $hide = 'hide' ?>
     <section class="section">
         <div class="row">
             <div class="col-lg-12">
-
                 <div class="card">
-                    <div class="card-body">
-                        @if($role =="admin")
-                        <h5 class="card-title">
+                    <div class="card-title p-3">
+                        <div class="d-flex justify-content-between align-items-center">
+                            <h5>
+                                @if($role =="admin")
+                                <a href="{{url('admin/product/create')}}" class="btn btn-primary">
+                                    <i class="bi bi-plus-circle"></i> Tambah Data
+                                </a>
+                                @else
+                                Data Orderan Saya <span class="badge bg-info text-dark">{{ $name }}</span>
+                                @endif
+                            </h5>
 
-                            <a href="{{url('admin/product/create')}}">
-                                <button type="button" class="btn btn-primary"> <i class="bi bi-plus-circle"></i></i> Tambah Data</button>
-                            </a>
-                        </h5>
-                        @else
-                        <h5 class="card-title">
-                            Data Orderan Saya <span class="badge bg-info text-dark"> {{ $name }}</span>
-                        </h5>
-
-                        @endif
-                        @if (session('success'))
-
-                        <div class="alert alert-success alert-dismissible fade show" role="alert">
-                            {{ session('success') }}
-                            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                            <div class="ml-auto">
+                                <a id="export" href="{{ route('export.data') }}" class="btn btn-primary">
+                                    <i class="bi bi-file-earmark-excel"></i> Export to Excel
+                                </a>
+                            </div>
                         </div>
-                        @endif
-                        <!-- Table with stripped rows -->
-                        <table class="table table-borderless datatable">
-                            <thead>
-                                <tr>
-                                    <th scope="col">#</th>
-                                    <th scope="col">Id </th>
-                                    <th scope="col">User</th>
-                                    <th scope="col">Product</th>
-                                    <th scope="col">Price</th>
-                                    <th scope="col">Qty</th>
-                                    <th scope="col">Total</th>
-                                    <th scope="col">Created</th>
-                                    <th scope="col">Status</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <?php
-                                $no = 1; ?>
-                                @foreach ($orders as $order)
-                                <tr>
-                                    <td>{{ $no++ }}</td>
-                                    <th scope="row">#{{ $order->code_id }} - {{ $order->id }}</th>
-                                    <td>{{ $order->userName }}</td>
-                                    <td>{{ $order->productName }}</td>
-                                    <td>{{ number_format($order->price, 0, ',', '.') }}</td>
-                                    <td>{{ $order->qty }}</td>
-                                    <td>{{ number_format($order->total, 0, ',', '.') }}</td>
-                                    <td>{{ $order->created_at }}</td>
-                                    <td><span class="badge bg-success">Proses</span></td>
-                                </tr>
-                                @endforeach
-
-                            </tbody>
-                        </table>
-                        <!-- End Table with stripped rows -->
-
                     </div>
-                </div>
 
+                    @if (session('success'))
+                    <div class="alert alert-success alert-dismissible fade show" role="alert">
+                        {{ session('success') }}
+                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                    </div>
+                    @endif
+
+                    <!-- Rest of your table code remains the same -->
+
+                    <!-- Table with stripped rows -->
+
+                    <table class="table table-border datatable">
+                        <thead>
+                            <tr>
+                                <th scope="col">#</th>
+                                <th scope="col">Id </th>
+                                <th scope="col">User</th>
+                                <th scope="col">Product</th>
+                                <th scope="col">Price</th>
+                                <th scope="col">Qty</th>
+                                <th scope="col">Total</th>
+                                <th scope="col">Created</th>
+                                <th scope="col">Status</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <?php
+                            $no = 1; ?>
+                            @foreach ($orders as $order)
+                            <tr>
+                                <td>{{ $no++ }}</td>
+                                <th scope="row">#{{ $order->code_id }} - {{ $order->id }}</th> 
+                                <td>{{ $order->userName }}</td>
+                                <td>{{ $order->productName }}</td>
+                                <td>{{ number_format($order->price, 0, ',', '.') }}</td>
+                                <td>{{ $order->qty }}</td>
+                                <td>{{ number_format($order->total, 0, ',', '.') }}</td>
+                                <td>{{ $order->created_at }}</td>
+                                <td><span class="badge bg-success">Proses</span></td>
+                            </tr>
+                            @endforeach
+
+                        </tbody>
+                    </table>
+                    <!-- End Table with stripped rows -->
+
+                </div>
             </div>
+
+        </div>
         </div>
     </section>
 
