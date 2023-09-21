@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\product;
 use Illuminate\Http\Request;
 
 class HomeController extends Controller
@@ -23,6 +24,17 @@ class HomeController extends Controller
      */
     public function index()
     {
-        return view('home');
-    }
+
+        $products = Product::all();
+         if (auth()->user()->role == 0){
+
+             $role = 'users'; 
+         }
+        else{
+
+            $role = 'admin';  
+        }
+         
+        // Kirim data produk ke tampilan "product.home"
+        return view('home', compact('products', 'role'));    }
 }

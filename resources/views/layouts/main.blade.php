@@ -265,11 +265,15 @@
 
     <!-- ======= Sidebar ======= -->
     <aside id="sidebar" class="sidebar">
-
+        @if (auth()->user()->role == 0)
+        <?php $role = 'users'; ?>
+        @else
+        <?php $role = 'admin'; ?>
+        @endif
         <ul class="sidebar-nav" id="sidebar-nav">
 
             <li class="nav-item">
-                <a class="nav-link " href="index.html">
+                <a class="nav-link " href="{{url($role)}}">
                     <i class="bi bi-grid"></i>
                     <span>Dashboard</span>
                 </a>
@@ -278,21 +282,21 @@
             <li class="nav-heading">Pages</li>
 
             <li class="nav-item">
-                <a class="nav-link collapsed" href="{{url('admin/product/list')}}">
+                <a class="nav-link collapsed" href="{{url($role.'/product/list')}}">
                     <i class="bi bi-person"></i>
                     <span>Product</span>
                 </a>
             </li><!-- End Profile Page Nav -->
 
             <li class="nav-item">
-                <a class="nav-link collapsed" href="{{url('admin/order')}}">
+                <a class="nav-link collapsed" href="{{url($role.'/order')}}">
                     <i class="bi bi-envelope"></i>
                     <span>Order</span>
                 </a>
             </li><!-- End Contact Page Nav -->
 
             <li class="nav-item">
-                <a class="nav-link collapsed" href="{{url('admin/user')}}">
+                <a class="nav-link collapsed" href="{{url($role.'/user')}}">
                     <i class="bi bi-card-list"></i>
                     <span>Users</span>
                 </a>
@@ -310,7 +314,7 @@
             </form>
 
 
-            
+
         </ul>
 
     </aside><!-- End Sidebar-->

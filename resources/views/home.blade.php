@@ -15,6 +15,30 @@
 
     <section class="section dashboard">
         <div class="row">
+            @foreach ($products as $product)
+
+            <div class="card mb-3">
+                <div class="row g-0">
+                    <div class="col-md-4">
+                        <img src="{{ asset('storage/images/' . $product->img) }}" width="300px" class="img-fluid rounded-start" alt="...">
+                    </div>
+                    <div class="col-md-8">
+                        <div class="card-body">
+                            <h5 class="card-title">{{ $product->name }}</h5>
+                            <span class="card-title">Rp. {{ $product->price }}</span>
+                            <i class=" ">Stok: {{ $product->stok }}</i>
+                            <p class="card-text"> {{ $product->desc }}</p>
+
+                            <h5 class="card-title">
+                                <a class="nav-link collapsed" href="{{ route('order.create', ['id' => $product->id]) }}">
+                                    <button type=" button" class="btn btn-primary"> <i class="bi bi-bag-plus"></i></i> Order</button>
+                                </a>
+                            </h5>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            @endforeach
 
             <!-- Left side columns -->
             <div class="col-lg-8">

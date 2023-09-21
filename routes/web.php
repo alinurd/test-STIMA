@@ -31,6 +31,8 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth', 'isAdmin']], functio
 });
 Route::group(['prefix' => 'users', 'middleware' => ['auth', 'isUser']], function () {
     Route::get('/', [UserController::class, 'index']);
+    Route::get('/order/create/{id}', [ProductController::class, 'create'])->name('products.create');
+
 });
 
 
