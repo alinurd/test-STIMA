@@ -111,12 +111,12 @@
                     <span>Dashboard</span>
                 </a>
             </li>
-            <li class="nav-item">
+            <!-- <li class="nav-item">
                 <a class="nav-link " href="{{route('kirimemail.index')}}">
                     <i class="bi bi-grid"></i>
                     <span>kirimemail.index</span>
                 </a>
-            </li>
+            </li> -->
             <li class="nav-item">
                 <a class="nav-link " href="{{url('home')}}">
                     <i class="bi bi-grid"></i>

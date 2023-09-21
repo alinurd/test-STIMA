@@ -17,7 +17,7 @@ return new class extends Migration
             $table->unsignedBigInteger('user_id');
             $table->foreign('user_id')->references('id')->on('users');
             $table->unsignedBigInteger('product_id'); 
-            $table->foreign('product_id')->references('id')->on('products');  
+            // $table->foreign('product_id')->references('id')->on('products');  
             $table->integer('price');
             $table->integer('qty');
             $table->integer('total');
@@ -38,7 +38,7 @@ return new class extends Migration
         Schema::table('orders', function (Blueprint $table) {
             $table->dropIndex(['code_id']);
             $table->dropForeign(['user_id']);
-            $table->dropForeign(['product_id']);  
+            // $table->dropForeign(['product_id']);  
         });
 
         Schema::dropIfExists('orders');
