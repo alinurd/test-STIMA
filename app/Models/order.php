@@ -17,6 +17,7 @@ class order extends Model
         'total',
         'qty',
         'code_id',
+        'productName',
     ];
     public $timestamps = true;
     protected static function boot()

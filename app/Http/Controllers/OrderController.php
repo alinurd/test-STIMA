@@ -91,6 +91,7 @@ class OrderController extends Controller
 
             $validatedData['created_at'] = Carbon::now();
             $validatedData['user_id'] = auth()->user()->id;
+            $validatedData['productName'] =  $product->name;
 
             $ordercek = Order::create($validatedData);
 

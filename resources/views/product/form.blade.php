@@ -72,9 +72,15 @@
                                 </div>
 
                                 <div class="col-md-12">
+                                    @if ($id == null)
                                     <label for="inputNumber" class="col-sm-2 col-form-label">File Upload</label>
+                                    @else
+                                    <label for="inputNumber" class="col-sm-2 col-form-label">Poro product</label>
+                                    @endif
                                     <div class="col-sm-10">
-                                        <input class="form-control"  name="image" type="file" id="formFile">
+                                        @if ($id == null)
+                                        <input class="form-control" name="image" type="file" id="formFile" required>
+                                        @endif
                                         <br>
                                         @if ($id !== null && $data->img)
                                         <img src="{{ asset('storage/images/' . $data->img) }}" width="200px" alt="Product Image">
