@@ -49,7 +49,8 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                {{ $no=1 }}
+                                <?php
+                                $no=1;?>
                                 @foreach ($products as $product)
                                 <tr>
                                     <th scope="row"> {{ $no++ }}</th>
