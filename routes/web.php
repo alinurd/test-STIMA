@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\AdminContoller;
+use App\Http\Controllers\OrderController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
@@ -31,7 +32,7 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth', 'isAdmin']], functio
 });
 Route::group(['prefix' => 'users', 'middleware' => ['auth', 'isUser']], function () {
     Route::get('/', [UserController::class, 'index']);
-    Route::get('/order/create/{id}', [ProductController::class, 'create'])->name('products.create');
+    Route::get('/order/create/{id}', [OrderController::class, 'create'])->name('order.create');
 
 });
 
