@@ -3,6 +3,7 @@ website di ini di bangun untuk memenuhi test Teknis  yang diberikan oleh  PT.Edu
 dibangun menggunakan framwork laravel dan tamplate admin bootstrapp. 
 untuk menjalankan apps ini perlunya melalkukan setup dan configurasi yang di perlukan:
 
+note: file dokumentasi database tersimpan di public/dokumentasi database.drawio.pdf
  
 
 ## setup  
