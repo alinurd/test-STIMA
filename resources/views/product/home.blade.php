@@ -67,10 +67,11 @@
                                             <i class="bi bi-trash"></i></i>
 
                                         </a> |
-                                        <a class="nav-link collapsed text-warning" href="{{url('admin/product/update')}}">
-                                            <i class="bi bi-pencil-square"></i></i>
-
+                                        
+                                        <a class="nav-link collapsed text-warning" href="{{ route('products.edit', ['id' => $product->id]) }}">
+                                            <i class="bi bi-pencil-square"></i>
                                         </a>
+
                                     </td>
                                 </tr>
                                 @endforeach
