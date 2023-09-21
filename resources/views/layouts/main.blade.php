@@ -278,7 +278,7 @@
             <li class="nav-heading">Pages</li>
 
             <li class="nav-item">
-                <a class="nav-link collapsed" href="{{url('admin/product')}}">
+                <a class="nav-link collapsed" href="{{url('admin/product/list')}}">
                     <i class="bi bi-person"></i>
                     <span>Product</span>
                 </a>

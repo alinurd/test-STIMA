@@ -15,6 +15,7 @@
         </nav>
     </div><!-- End Page Title -->
 
+
     <section class="section">
         <div class="row">
             <div class="col-lg-12">
@@ -26,56 +27,46 @@
                                 <button type="button" class="btn btn-dark"> <i class="bi bi-plus-circle-fill"></i></i></button>
                             </a>
                         </h5>
-
-                        <p>Add lightweight datatables to your project with using the <a href="https://github.com/fiduswriter/Simple-DataTables" target="_blank">Simple DataTables</a> library. Just add <code>.datatable</code> class name to any table you wish to conver to a datatable</p>
-
+                        @if (session('success'))
+                        <div class="alert alert-success">
+                            {{ session('success') }}
+                        </div>
+                        @endif
                         <!-- Table with stripped rows -->
                         <table class="table datatable">
                             <thead>
                                 <tr>
                                     <th scope="col">#</th>
                                     <th scope="col">Name</th>
-                                    <th scope="col">Position</th>
-                                    <th scope="col">Age</th>
-                                    <th scope="col">Start Date</th>
+                                    <th scope="col">Code</th>
+                                    <th scope="col">Stok</th>
+                                    <th scope="col">Price</th>
+                                    <th scope="col">Created At</th>
+                                    <th scope="col">Action</th>
                                 </tr>
                             </thead>
                             <tbody>
+                                @foreach ($products as $product)
                                 <tr>
                                     <th scope="row">1</th>
-                                    <td>Brandon Jacob</td>
-                                    <td>Designer</td>
-                                    <td>28</td>
-                                    <td>2016-05-25</td>
+                                    <td>{{ $product->name }}</td>
+                                    <td>{{ $product->code }}</td>
+                                    <td>{{ $product->stok }}</td>
+                                    <td>{{ $product->price }}</td>
+                                    <td>{{ $product->created_at }}</td>
+                                    <td>
+                                        <a class="nav-link collapsed text-danger" href="{{url('admin/product/destroy')}}">
+                                            <i class="bi bi-trash"></i></i>
+
+                                        </a> |
+                                        <a class="nav-link collapsed text-warning" href="{{url('admin/product/update')}}">
+                                            <i class="bi bi-pencil-square"></i></i>
+
+                                        </a>
+                                    </td>
                                 </tr>
-                                <tr>
-                                    <th scope="row">2</th>
-                                    <td>Bridie Kessler</td>
-                                    <td>Developer</td>
-                                    <td>35</td>
-                                    <td>2014-12-05</td>
-                                </tr>
-                                <tr>
-                                    <th scope="row">3</th>
-                                    <td>Ashleigh Langosh</td>
-                                    <td>Finance</td>
-                                    <td>45</td>
-                                    <td>2011-08-12</td>
-                                </tr>
-                                <tr>
-                                    <th scope="row">4</th>
-                                    <td>Angus Grady</td>
-                                    <td>HR</td>
-                                    <td>34</td>
-                                    <td>2012-06-11</td>
-                                </tr>
-                                <tr>
-                                    <th scope="row">5</th>
-                                    <td>Raheem Lehner</td>
-                                    <td>Dynamic Division Officer</td>
-                                    <td>47</td>
-                                    <td>2011-04-19</td>
-                                </tr>
+                                @endforeach
+
                             </tbody>
                         </table>
                         <!-- End Table with stripped rows -->

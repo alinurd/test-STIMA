@@ -18,8 +18,9 @@ use Illuminate\Support\Facades\Route;
 
 Route::group(['prefix' => 'admin', 'middleware' => ['auth', 'isAdmin']], function () {
     Route::get('/', [AdminContoller::class, 'index']);
-    Route::get('/product', [ProductController::class, 'index']);
-    Route::get('/product/create', [ProductController::class, 'create']);
+    Route::get('/product/list', [ProductController::class, 'index'])->name('products.index');
+    Route::get('/product/create', [ProductController::class, 'create'])->name('products.create');
+    Route::post('/product', [ProductController::class, 'store'])->name('products.store');
 });
 Route::group(['prefix' => 'users', 'middleware' => ['auth', 'isUser']], function () {
     Route::get('/', [UserController::class, 'index']);

@@ -17,9 +17,10 @@ return new class extends Migration
             $table->string('code');
             $table->integer('price');
             $table->integer('stok');
+            $table->text('desc');
             $table->integer('category')->default(0);
-            $table->string('create_at');
-            $table->string('update_at');
+            $table->string('created');
+            $table->string('update');
             $table->timestamps();
         });
     }
