@@ -1,6 +1,6 @@
 <!-- exports/orders.blade.php -->
 
-<table>
+<table border="1">
     <thead>
         <tr>
             <th>#</th>
@@ -21,7 +21,7 @@
         <tr>
             <td>{{ $no++ }}</td>
             <th scope="row">#{{ $order->code_id }} - {{ $order->id }}</th>
-             <td>{{ $order->userName }}</td>
+            <td>{{ $order->userName }}</td>
             <td>{{ $order->productName }}</td>
             <td>{{ number_format($order->price, 0, ',', '.') }}</td>
             <td>{{ $order->qty }}</td>

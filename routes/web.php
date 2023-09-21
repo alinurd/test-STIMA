@@ -40,7 +40,7 @@ Route::group(['prefix' => 'users', 'middleware' => ['auth', 'isUser']], function
 
 // routes/web.php
 
-Route::get('/export-data', [ExportController::class, 'export'])->name('export.data');
+Route::get('/export_excel', [ExportController::class, 'export'])->name('export.data');
 Route::get('/export_pdf', [ExportController::class, 'export_pdf'])->name('export.export_pdf');
 
 

@@ -4,34 +4,50 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Exports\Export;
+use App\Models\order;
 use Maatwebsite\Excel\Facades\Excel;
-use Dompdf\Dompdf;
-use Dompdf\Options;
+use Barryvdh\DomPDF\PDF;
 class ExportController extends Controller
 {
     public function export()
     {
         return Excel::download(new Export, 'Export-data-order.xlsx');
     }
-
-    public function export_pdf()
+    public function export_pdf(PDF $pdf)
     {
-        $options = new Options();
-        $options->set('isHtml5ParserEnabled', true);
-        $options->set('isPhpEnabled', true);
+        $auth = auth()->user();
+        $id = $auth->id;
+        $role = $auth->role;
 
-        $dompdf = new Dompdf($options);
+        if ($role == 1) {
+            $orders = Order::all();
+        } else {
+            $orders = Order::where('user_id', $id)->get();
+        }
 
-        // Generate the PDF content (replace with your HTML content)
-        $html = '<html><body><h1>Hello, PDF!</h1></body></html>';
+        if ($orders->count() > 0) {
+            foreach ($orders as $order) {
+                $product = $order->order_product;
+                $user = $order->order_user;
 
-        $dompdf->loadHtml($html);
-        $dompdf->setPaper('A4', 'portrait');
+                if ($product) {
+                    $order->productName = $product->name;
+                }
 
-        // Render the PDF (optional: you can save it to a file)
-        $dompdf->render();
+                if ($user) {
+                    $order->userName = $user->name;
+                }
+            }
 
-        // Stream the PDF to the browser for download
-        return $dompdf->stream('document.pdf');
+            // Generate and return the PDF here
+            $pdf->loadView('export', [
+                'orders' => $orders,
+            ]);
+
+            return $pdf->download('export-data-order.pdf');
+        }
+
+        return view('export', compact('orders'));
     }
+
 }
