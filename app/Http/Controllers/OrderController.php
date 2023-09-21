@@ -13,7 +13,13 @@ class OrderController extends Controller
     {
         $this->middleware('auth');
     }
+    public function index()
+    {
+        $products = Product::all();
 
+        // Kirim data produk ke tampilan "product.home"
+        return view('order.home', compact('products'));
+    }
     public function create($id)
     {
 
@@ -24,43 +30,57 @@ class OrderController extends Controller
             return redirect()->route('users.index')->with('error', 'Produk tidak ditemukan');
         }
 
-        return view('product.form', compact('id', 'data'));
+        return view('order.form', compact('id', 'data'));
     }
 
 
 
     public function store(Request $request)
     {
-        dd($request);
-        $validatedData = $request->validate([
-            'name' => 'required|string|max:255',
-            'desc' => 'required|string|max:500',
-            'price' => 'required|numeric',
-            'stok' => 'required|numeric',
-        ]);
-        $validatedData['created_at'] = Carbon::now();
-        $validatedData['created'] = auth()->user()->name;
-        $validatedData['update'] = '';
-        $validatedData['img'] = '';
+        // dd(auth()->user()->id);
+        $product = Product::findOrFail($request->product_id);
+        
+        // dd($product);
+        $cekstok = false; // Initialize cekstok to false
 
-
-        if ($request->hasFile('image')) {
-            // Mendapatkan file gambar dari input
-            $image = $request->file('image');
-
-            // Menyimpan gambar dengan nama unik ke direktori tertentu (misalnya, storage/app/public/images)
-            $imageName = time() . '.' . $image->getClientOriginalExtension();
-            $image->storeAs('public/images', $imageName);
-
-            // Menyimpan nama gambar ke dalam database
-            $validatedData['img'] = $imageName;
+        if ($product) {
+            if ($product->stok >= $request->qty) { // Check if stock is sufficient
+                $product->stok = $product->stok - $request->qty;
+                $cekstok = true;
+            }
         }
 
+        if ($cekstok) { // Only proceed if stock is sufficient
+            $validatedData = $request->validate([
+                'price' => 'required|numeric',
+                'total' => 'required|numeric',
+                'product_id' => 'required|numeric',
+                'qty' => 'required|numeric',
+            ]);
 
-        Order::create($validatedData);
+            $validatedData['created_at'] = Carbon::now();
+            $validatedData['user_id'] = auth()->user()->id;
 
-        session()->flash('success', 'order created successfully');
-        return redirect()->route('orders.index')->with('success', 'order created successfully');
+            $ordercek = Order::create($validatedData);
+
+            if ($ordercek) {
+                $product->save(); // Save the updated stock
+            }
+
+            // dd('stok success');
+            // session()->flash('success', 'Order created successfully');
+            return redirect()->route('order.index')->with('success', 'Order created successfully');
+        } else {
+
+            // dd('stok tidak cukup');
+            session()->flash('error', 'Stok product tidak cukup');
+            return redirect()->route('home')->with('error', 'Stok product tidak cukup');
+        }
+
+        
+        
+
+
         // return redirect('/admin/order')->with('success', 'order created successfully');
     }
 }

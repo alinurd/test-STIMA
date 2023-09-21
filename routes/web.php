@@ -27,12 +27,15 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth', 'isAdmin']], functio
     Route::get('/product/destroy/{id}', [ProductController::class, 'destroy'])->name('products.delete');
     // Route::get('/destroy/{id}', [OutletController::class, 'destroy'])->name('hapus');
 
-// Route::get('/product/{product}/edit', [ProductController::class, 'edit'])->name('products.edit');
+    // Route::get('/product/{product}/edit', [ProductController::class, 'edit'])->name('products.edit');
     
 });
 Route::group(['prefix' => 'users', 'middleware' => ['auth', 'isUser']], function () {
     Route::get('/', [UserController::class, 'index']);
+    Route::get('/order/list', [OrderController::class, 'index'])->name('order.index');
+
     Route::get('/order/create/{id}', [OrderController::class, 'create'])->name('order.create');
+    Route::post('/order', [OrderController::class, 'store'])->name('order.store');
 
 });
 
