@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\AdminContoller;
+use App\Http\Controllers\ProductController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 
@@ -17,6 +18,8 @@ use Illuminate\Support\Facades\Route;
 
 Route::group(['prefix' => 'admin', 'middleware' => ['auth', 'isAdmin']], function () {
     Route::get('/', [AdminContoller::class, 'index']);
+    Route::get('/product', [ProductController::class, 'index']);
+    Route::get('/product/create', [ProductController::class, 'create']);
 });
 Route::group(['prefix' => 'users', 'middleware' => ['auth', 'isUser']], function () {
     Route::get('/', [UserController::class, 'index']);
