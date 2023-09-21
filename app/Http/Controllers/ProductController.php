@@ -43,6 +43,7 @@ class ProductController extends Controller
         $validatedData['created_at'] = Carbon::now();
         $validatedData['created'] = auth()->user()->name;
         $validatedData['update'] ='';
+        $validatedData['img'] = '';
 
 
         if ($request->hasFile('image')) {
