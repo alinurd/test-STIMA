@@ -20,9 +20,15 @@ class ProductController extends Controller
     public function index()
     {
         $products = Product::all();
+        if (auth()->user()->role == 0) {
 
+            $role = 'users';
+        } else {
+
+            $role = 'admin';
+        }
         // Kirim data produk ke tampilan "product.home"
-        return view('product.home', compact('products'));
+        return view('product.home', compact('products','role'));
 
     }
 

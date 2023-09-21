@@ -41,7 +41,12 @@ class OrderController extends Controller
             }
         }
         // dd($orders);
+        if (auth()->user()->role == 0) {
+            $role = 'users';
+        } else {
 
+            $role = 'admin';
+        }
         return view('order.home', compact('orders', 'role'));
     }
     public function create($id)
