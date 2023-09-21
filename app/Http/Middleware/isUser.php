@@ -16,11 +16,11 @@ class isUser
     public function handle(Request $request, Closure $next): Response
     {
         // Periksa apakah pengguna adalah admin (contoh: dengan memeriksa peran 'admin')
-        if (auth()->check() && auth()->user()->isUser()) {
+        if (auth()->check() && auth()->user()->role == 0) {
             return $next($request);
         }
 
         // Jika pengguna bukan admin, mungkin Anda ingin mengarahkannya atau memberikan pesan akses ditolak
-        return redirect('/home')->with('error', 'Akses ditolak.');
+        return redirect('login')->with('error', 'Akses ditolak.');
     }
 }
