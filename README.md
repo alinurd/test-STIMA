@@ -10,7 +10,7 @@ note: file dokumentasi database tersimpan di public/dokumentasi database.drawio.
 
 1. jalankan clonning
  <p>git clone https://github.com/alinurd/test-STIMA.git </p>
-
+lalu masuk ke direkotory cd test-STIMA
 2. install dan jalan kan npm npm
 <p>npm install</p>
 <p>npm run dev </p>
