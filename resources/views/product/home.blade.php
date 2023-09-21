@@ -40,23 +40,25 @@
                                     <th scope="col">Name</th>
                                     <th scope="col">Code</th>
                                     <th scope="col">Stok</th>
-                                    <th scope="col">Price</th>
+                                    <th scope="col">IDR</th>
+                                    <th scope="col">Images</th>
                                     <th scope="col">Created At</th>
                                     <th scope="col">Action</th>
                                 </tr>
                             </thead>
                             <tbody>
+                                {{ $no=1 }}
                                 @foreach ($products as $product)
                                 <tr>
-                                    <th scope="row">1</th>
+                                    <th scope="row"> {{ $no++ }}</th>
                                     <td>{{ $product->name }}</td>
                                     <td>{{ $product->code }}</td>
                                     <td>{{ $product->stok }}</td>
-                                    <td>{{ $product->price }}</td>
+                                    <td>{{ number_format($product->price, 0, ',', '.') }}</td>
 
-                                    <td> 
-                                            <img id="openLightbox" src="{{ asset('storage/images/' . $product->img) }}" width="100px" alt="gambar {{ $product->name }} tidak bisa ditampilkan">
-                                         
+                                    <td>
+                                        <img id="openLightbox" src="{{ asset('storage/images/' . $product->img) }}" width="100px" alt="gambar {{ $product->name }} tidak bisa ditampilkan">
+
                                     </td>
 
                                     <td>{{ $product->created_at }}</td>
