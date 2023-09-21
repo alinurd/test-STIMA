@@ -15,10 +15,34 @@ class OrderController extends Controller
     }
     public function index()
     {
-        $products = Product::all();
+        $auth = auth()->user();
+        $id = $auth->id;
+        $role = $auth->role;
+        if ($role == 1) {
+            $orders = Order::all();
+        } else {
+            $orders = Order::where('user_id', $id)->get();
+        }
 
-        // Kirim data produk ke tampilan "product.home"
-        return view('order.home', compact('products'));
+        if ($orders->count() > 0) {
+            foreach ($orders as $order) {
+                $product = $order->order_product;
+                $user = $order->order_user;
+                if ($product) {
+                    // dd($product);
+
+                    $order->productName = $product->name;
+                }
+                if ($user) {
+                    // dd($user);
+
+                    $order->userName = $user->name;
+                }
+            }
+        }
+        // dd($orders);
+
+        return view('order.home', compact('orders', 'role'));
     }
     public function create($id)
     {
@@ -39,7 +63,7 @@ class OrderController extends Controller
     {
         // dd(auth()->user()->id);
         $product = Product::findOrFail($request->product_id);
-        
+
         // dd($product);
         $cekstok = false; // Initialize cekstok to false
 
@@ -76,10 +100,6 @@ class OrderController extends Controller
             session()->flash('error', 'Stok product tidak cukup');
             return redirect()->route('home')->with('error', 'Stok product tidak cukup');
         }
-
-        
-        
-
 
         // return redirect('/admin/order')->with('success', 'order created successfully');
     }

@@ -289,7 +289,7 @@
             </li><!-- End Profile Page Nav -->
 
             <li class="nav-item">
-                <a class="nav-link collapsed" href="{{url($role.'/order')}}">
+                <a class="nav-link collapsed" href="{{url($role.'/order/list')}}">
                     <i class="bi bi-envelope"></i>
                     <span>Order</span>
                 </a>

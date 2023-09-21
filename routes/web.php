@@ -25,10 +25,8 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth', 'isAdmin']], functio
     Route::get('/product/edit/{id}', [ProductController::class, 'edit'])->name('products.edit');
     Route::post('/product/update/{id}', [ProductController::class, 'update'])->name('products.update');
     Route::get('/product/destroy/{id}', [ProductController::class, 'destroy'])->name('products.delete');
-    // Route::get('/destroy/{id}', [OutletController::class, 'destroy'])->name('hapus');
-
-    // Route::get('/product/{product}/edit', [ProductController::class, 'edit'])->name('products.edit');
-    
+    Route::get('/order/list', [OrderController::class, 'index'])->name('order.index');
+  
 });
 Route::group(['prefix' => 'users', 'middleware' => ['auth', 'isUser']], function () {
     Route::get('/', [UserController::class, 'index']);

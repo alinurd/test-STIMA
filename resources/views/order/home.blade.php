@@ -1,16 +1,26 @@
 @extends('layouts.main')
 @section('content')
 
+@if (auth()->user()->role == 0)
+<?php
+$role = 'users';
+$name =  auth()->user()->name; ?>
+@else
+<?php
+$role = 'admin';
+$name = 'All Users';
+$hide = 'hide' ?>
 
+@endif
 <main id="main" class="main">
 
     <div class="pagetitle">
-        <h1>Data Product</h1>
+        <h1>Data Orders </h1>
         <nav>
             <ol class="breadcrumb">
                 <li class="breadcrumb-item"><a href="index.html">Home</a></li>
-                <li class="breadcrumb-item">Admin</li>
-                <li class="breadcrumb-item active">Product</li>
+                <li class="breadcrumb-item">{{ $role }}</li>
+                <li class="breadcrumb-item active">Order</li>
             </ol>
         </nav>
     </div><!-- End Page Title -->
@@ -22,11 +32,19 @@
 
                 <div class="card">
                     <div class="card-body">
+                        @if($role =="admin")
                         <h5 class="card-title">
-                            <a class="nav-link collapsed" href="{{url('admin/product/create')}}">
+
+                            <a href="{{url('admin/product/create')}}">
                                 <button type="button" class="btn btn-primary"> <i class="bi bi-plus-circle"></i></i> Tambah Data</button>
                             </a>
                         </h5>
+                        @else
+                        <h5 class="card-title">
+                            Data Orderan Saya <span class="badge bg-info text-dark"> {{ $name }}</span>
+                        </h5>
+
+                        @endif
                         @if (session('success'))
 
                         <div class="alert alert-success alert-dismissible fade show" role="alert">
@@ -35,47 +53,34 @@
                         </div>
                         @endif
                         <!-- Table with stripped rows -->
-                        <table class="table datatable">
+                        <table class="table table-borderless datatable">
                             <thead>
                                 <tr>
                                     <th scope="col">#</th>
-                                    <th scope="col">Name</th>
-                                    <th scope="col">Code</th>
-                                    <th scope="col">Stok</th>
-                                    <th scope="col">IDR</th>
-                                    <th scope="col">Images</th>
-                                    <th scope="col">Created At</th>
-                                    <th scope="col">Action</th>
+                                    <th scope="col">Id </th>
+                                    <th scope="col">User</th>
+                                    <th scope="col">Product</th>
+                                    <th scope="col">Price</th>
+                                    <th scope="col">Qty</th>
+                                    <th scope="col">Total</th>
+                                    <th scope="col">Created</th>
+                                    <th scope="col">Status</th>
                                 </tr>
                             </thead>
                             <tbody>
                                 <?php
-                                $no=1;?>
-                                @foreach ($products as $product)
+                                $no = 1; ?>
+                                @foreach ($orders as $order)
                                 <tr>
-                                    <th scope="row"> {{ $no++ }}</th>
-                                    <td>{{ $product->name }}</td>
-                                    <td>{{ $product->code }}</td>
-                                    <td>{{ $product->stok }}</td>
-                                    <td>{{ number_format($product->price, 0, ',', '.') }}</td>
-
-                                    <td>
-                                        <img id="openLightbox" src="{{ asset('storage/images/' . $product->img) }}" width="100px" alt="gambar {{ $product->name }} tidak bisa ditampilkan">
-
-                                    </td>
-
-                                    <td>{{ $product->created_at }}</td>
-                                    <td>
-                                        <a class="nav-link collapsed text-danger" onclick="return confirm('yakin Hapus Product ini?') ?  submit() : false" href="{{ route('products.delete', ['id' => $product->id]) }}">
-                                            <i class="bi bi-trash"></i></i>
-
-                                        </a>
-
-                                        <a class="nav-link collapsed text-warning" href="{{ route('products.edit', ['id' => $product->id]) }}">
-                                            <i class="bi bi-pencil-square"></i>
-                                        </a>
-
-                                    </td>
+                                    <td>{{ $no++ }}</td>
+                                    <th scope="row">#{{ $order->code_id }} - {{ $order->id }}</th>
+                                    <td>{{ $order->userName }}</td>
+                                    <td>{{ $order->productName }}</td>
+                                    <td>{{ number_format($order->price, 0, ',', '.') }}</td>
+                                    <td>{{ $order->qty }}</td>
+                                    <td>{{ number_format($order->total, 0, ',', '.') }}</td>
+                                    <td>{{ $order->created_at }}</td>
+                                    <td><span class="badge bg-success">Proses</span></td>
                                 </tr>
                                 @endforeach
 

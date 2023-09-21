@@ -27,4 +27,12 @@ class order extends Model
             $order->code_id = Str::random(8);
         });
     }
+    public function order_product()
+    {
+        return $this->belongsTo(Product::class, 'product_id');
+    }
+    public function order_user()
+    {
+        return $this->belongsTo(User::class, 'user_id');
+    }
 }
