@@ -111,6 +111,12 @@
                     <span>Dashboard</span>
                 </a>
             </li>
+            <li class="nav-item">
+                <a class="nav-link " href="{{url('home')}}">
+                    <i class="bi bi-grid"></i>
+                    <span>Halaman Depan</span>
+                </a>
+            </li>
 
             <li class="nav-heading">Pages</li>
             <?php if ($role == "admin") { ?>
