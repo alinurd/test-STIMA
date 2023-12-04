@@ -1,9 +1,4 @@
-## About  
-website di ini di bangun untuk memenuhi test Teknis  yang diberikan oleh  PT.Edukasi Indonesia Jaya
-dibangun menggunakan framwork laravel dan tamplate admin bootstrapp. 
-untuk menjalankan apps ini perlunya melalkukan setup dan configurasi yang di perlukan:
-
-note: file dokumentasi database tersimpan di public/dokumentasi database.drawio.pdf
+ 
  
 
 ## setup  
@@ -31,7 +26,7 @@ sesuiakan aku smtp, jika tidak ada bisa menggunakan settingan seperti di bawah
 <p>MAIL_HOST=smtp.gmail.com</p>
 <p>MAIL_PORT=587  atau 465 </p>
 <p>MAIL_USERNAME=ali.nrdn14005@gmail.com</p>
-<p>MAIL_PASSWORD=yglalmzaxtqdnufe </p>
+<p>MAIL_PASSWORD= </p>
 <p>MAIL_ENCRYPTION=tls</p>
 <p>MAIL_FROM_ADDRESS=ali.nrdn14005@gmail.com</p>
  
